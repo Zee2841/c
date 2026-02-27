@@ -1,0 +1,128 @@
+Q1Q 1. Write an Android Application Take on one Toggle Button, if Button is on Show the
+Toast Message WIFI is ON, else show the Toast Message WIFI is OFF.
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="WIFI ON"
+        android:textOff="WIFI OFF"/>
+</LinearLayout>
+
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    ToggleButton toggle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        toggle = findViewById(R.id.toggleButton);
+
+        toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                Toast.makeText(MainActivity.this,
+                        "WIFI is ON",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this,
+                        "WIFI is OFF",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+
+Q2
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText number;
+    Button calculate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        number = findViewById(R.id.etNumber);
+        calculate = findViewById(R.id.btnCalculate);
+
+        calculate.setOnClickListener(v -> {
+
+            int num = Integer.parseInt(number.getText().toString());
+            long fact = 1;
+
+            for(int i = 1; i <= num; i++) {
+                fact = fact * i;
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Factorial Result");
+            builder.setIcon(android.R.drawable.ic_dialog_info);
+
+            builder.setMessage("Entered Number: " + num +
+                    "\nFactorial: " + fact);
+
+            builder.setPositiveButton("OK", (dialog, which) -> {});
+
+            builder.setNegativeButton("Cancel", (dialog, which) -> {});
+
+            builder.setNeutralButton("Close", (dialog, which) -> {});
+
+            builder.setCancelable(false);  // Non-cancellable
+
+            builder.show();
+        });
+    }
+}
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate Factorial"/>
+
+</LinearLayout>
