@@ -1,0 +1,276 @@
+S1
+Q1. Write an Android Application Take on one Switch Button, if Button is on Show the
+Toast Message DATA is ON, else show the Toast Message Data is OFF
+[10]
+Q 2. Write an Android application that takes a Username and Password as input from
+the user on the main screen. When the user clicks the Login button:
+● If the login is successful, display a success message on a Text View in the activity
+SA.java.
+● If the login fails, display a failure message on a Text View in the activity TA.java.
+
+S2
+Q 1. Write an Android Application Take on one Toggle Button, if Button is on Show the
+Toast Message WIFI is ON, else show the Toast Message WIFI is OFF.
+[10]
+Q 2. Write an Android program that takes an integer number from the user and
+displays its factorial inside an Alert Dialog. The Alert Dialog must include an icon, a
+message displaying the entered number, a negative button, a positive button, and a
+neutral button. The dialog should be non-cancellable.
+
+S3
+Q 1. Write a Android program to check whether the number is prime or not take
+number from user.
+[10]
+Q 2. Create a user registration form that accepts the following information:
+Name (required field)
+Middle Name (optional field)
+Surname (required field)
+Phone Number (required field)
+Email ID (required field)
+Course Selection: BCA or MCA (using radio buttons)
+Include a "Save" button to submit the form.
+When the user clicks the "Save “ that will Print all the details in next activity on
+different different Text View
+
+S4
+Q 1. Write a Android program to check number is perfect or not take number from
+user.
+ [10]
+Q 2. Student Name (required field)
+Roll Number (required field)
+Email ID (required field)
+Phone Number (required field)
+Course Category: Programming/Design/Business/Languages (using spinner)
+Learning Mode: Online/Offline/Hybrid (using radio buttons)
+Previous Experience: Yes/No (using checkbox) Include an "Enrol Now" to show all
+details on the next activity.
+
+S5
+Q 1. Write a Android program take number from user and print its sum of digit on Tost
+message.
+[10]
+Q 2 Create an Android application that allows the user to select both date and time
+using Date Picker and Time Picker and display the selected values in a Text View.
+
+S6
+Q 1. Create an Android Application that Demonstrates Alert Dialog Box.
+[10]
+Q 2. Registration & Welcome Screen Write an Android application that takes Name,
+Email, and Mobile Number as input from the user on the registration screen. When the
+user clicks the Register button:
+•If all fields are filled, navigate to WelcomeActivity.java and display a personalized
+welcome message with the user's name.
+•If any field is empty, navigate to ErrorActivity.java and display an error message.
+
+S7
+Q 1. Write an Android Application to demonstrate Activity life cycle.
+[10]
+Q 2. Calculator with Result Display Write an Android application that takes two
+numbers and an operation (Add/Subtract/Multiply/Divide) as input. When the user
+clicks the Calculate button:
+● If the operation is valid, display the result on a Text View in ResultActivity.java.
+● If division by zero occurs, display an error message in ErrorActivity.java.
+
+S8
+Q 1.Create an Android application to demonstrate GridView using ArrayAdapter.
+ [10]
+Q 2. Age Verification System Write an Android application that takes Name and Age as
+input from the user. When the user clicks the Verify button:
+● If age is 18 or above, navigate to AccessGrantedActivity.java and display "Access
+Granted" message.
+● If age is below 18, navigate to AccessDeniedActivity.java and display "Access
+Denied - You must be 18+" message
+
+S9
+Q 1. Demonstrate Array Adapter using List View to display list of fruits.
+[10]
+Q 2. Course Registration System Write an Android application with a Spinner
+containing course names (BCA, BBA, B.Com, B.Sc.). When the user selects a course and
+clicks the Register button:
+● Navigate to ConfirmationActivity.java and display "You have registered for
+[Course Name]" in a Text View. 
+
+S10
+Q 1. Create an Android Application that Demonstrates List View and Onclick of List Display the
+Toast.
+ [10]
+Q 2. Grade Calculator Write an Android application with a Spinner showing grade
+options (A, B, C, D, F). When the user selects a grade and clicks Submit:
+● Display the grade description (Excellent, Good, Average, Below Average, Fail) in
+a Text View.
+
+S11
+Q 1. Create an Android Application that demonstrate Date Picker and DatePicker
+Dialgue.
+ [10]
+Q 2. Fragment Navigation using Buttons Write an Android application with two buttons
+(Home, About,Contact) and a Frame Layout. When the user clicks:
+● Home button: Replace the Frame Layout with Home Fragment showing "This is
+Home Page".
+● About button: Replace the Frame Layout with About Fragment showing "This is
+About Page".
+● Contact button: Replace the Frame Layout with About Fragment showing "This
+is Contact Page"
+
+S12
+Q 1 Write an android program to create a List View of countries and display an Alert
+Dialog Box after an item is selected from the list.
+[10]
+Q 2. Write a program on Android to implement a Tab Layout with three tabs
+representing BCA, MCA, and PHD courses, where clicking each tab loads the respective
+fragment into a Frame Layout.
+
+S13
+Q 1. Write an android program to create a List View of programming languages and
+display a Toast message when a language is selected.
+[10]
+Q 2. Write a program on Android to create three fragments (Profile, Settings, About)
+with Tab Layout navigation.
+
+S14
+Q 1. Write an android program to show the lifecycle of an activity.
+ [10]
+Q 2. Write a program on Android to create three fragments (Inbox, Sent, Drafts) using
+Tab Layout for an email application interface.
+
+S15
+Q 1. Write an android program to take a number from the user and print its reverse in
+a text view.
+ [10]
+Q 2. Write a program on Android to display three fragments (Dashboard, Orders,
+Account) using Bottom Navigation
+
+S16
+Q 1. Write an android program to take a number from the user and print its reverse in
+a text view.
+ [10]
+Q 2. Write a program on Android to display three fragments (Dashboard, Orders,
+Account) using Bottom Navigation
+
+S17
+Q 1. Write an android program to accept two numbers from the user and swap them.
+[10]
+Q 2. Write a program on Android to display three fragments (Home, Profile, About)
+using Bottom Navigation.
+
+S18
+Q 1. Write an android program to take a number from the user and check whether it is
+Armstrong or not.
+[10]
+Q 2. Create an Android application that allows the user to select both date and time
+using Date Picker and Time Picker and display the selected values in a Text View.
+
+S19
+Q 1. Write an android program to take numbers from user and check if it is even or
+odd.
+[10]
+Q 2. Develop an Android application with a button that opens a Date Picker Dialog and
+Time Picker Dialog sequentially. After selection, show the date and time in Text Views.
+
+S20
+Q 1. Create an Android application to demonstrate GridView using ArrayAdapter.
+[10]
+Q 2. Design and develop an Android application that accepts two numbers from the
+user. The application should calculate the Power (A^B) and the Average of the given
+numbers and display the selected result in the Text View using a Context Menu.
+
+S21
+Q 1. Develop an Android program to display a Toast message on button click .
+ [10]
+Q 2. Design and develop an Android application that accepts a number from the user
+and calculates its Square and Cube. The result should be displayed in a second activity
+based on the user’s selection from a Context Menu.
+
+S22
+Q 1.Create an Android application to demonstrate GridView using ArrayAdapter.
+[10]
+Q 2. Write an Android program in to display States in the first Spinner and Cities in the
+second Spinner based on the selected State .
+
+S23
+Q 1. Demonstrate Array Adapter using List View to display list of fruits.
+[10]
+Q 2. Write a program on Android to create three fragments (Profile, Settings, About)
+with Tab Layout navigation
+
+S24
+Q 1. Write an android program to take numbers from user and check if it is even or
+odd.
+ [10]
+Q 2. Create an Android application that allows the user to select both date and time
+using Date Picker and Time Picker and display the selected values in a Text View.
+
+S25
+Q 1. Write an android program to take a number from the user and print its reverse in
+a text view.
+ [10]
+Q 2. Write a program on Android to create three fragments (Inbox, Sent, Drafts) using
+Tab Layout for an email application interface.
+
+S26
+Q 1. Write an android program to accept two numbers from the user and swap them.
+[10]
+Q 2. Course Registration System Write an Android application with a Spinner
+containing course names (BCA, BBA, B.Com, B.Sc.). When the user selects a course and
+clicks the Register button:
+● Navigate to ConfirmationActivity.java and display "You have registered for
+[Course Name]" in a Text View.
+
+S27
+Q 1. Create an Android Application that demonstrate Date Picker and Date Picker
+Dialgue.
+[10]
+Q 2. Calculator with Result Display Write an Android application that takes two
+numbers and an operation (Add/Subtract/Multiply/Divide) as input. When the user
+clicks the Calculate button:
+● If the operation is valid, display the result on a Text View in ResultActivity.java.
+● If division by zero occurs, display an error message in ErrorActivity.java.
+
+S28
+Q 1. Create an Android application to demonstrate GridView using ArrayAdapter.
+ [10]
+Q 2. Create a form with:
+Customer Name (required)
+Table Number (required)
+Food Type: Veg or non-Veg (radio buttons)
+Phone Number (required) Add "Place Order" button. Show Alert Dialog "Order
+Received" and show in next activity.
+
+S29
+Q 1. Write a Android program to check number is perfect or not take number from
+user.
+[10]
+Q 2. Write an Android program to display Categories in the first Spinner and Products in
+the second Spinner based on the selected Category.
+
+S30
+Q 1. Write a Android program to check whether the number is prime or not take
+number from user.
+ [10]
+Q 2. Write an Android program that takes an integer number from the user and
+displays its factorial inside an Alert Dialog. The Alert Dialog must include an icon, a
+message displaying the entered number, a negative button, a positive button, and a
+neutral button. The dialog should be non-cancellable.
+
+S31
+Q 1 Write an Android Application Take on one Switch Button, if Button is on Show the
+Toast Message DATA is ON, else show the Toast Message Data is OFF.
+[10]
+Q 2. Create a user registration form that accepts the following information:
+Name (required field)
+Middle Name (optional field)
+Surname (required field)
+Phone Number (required field)
+Email ID (required field)
+Course Selection: BCA or MCA (using radio buttons)
+Include a "Save" button to submit the form.
+When the user clicks the "Save “ that will Print all the details in next activity on
+different different Text View
+
+
+
+
+
+
+
+
