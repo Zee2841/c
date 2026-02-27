@@ -1,0 +1,273 @@
+Q1 date picker and date picker dialogue
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <!-- DatePicker Widget -->
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Button for Dialog -->
+    <Button
+        android:id="@+id/btnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open DatePicker Dialog"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
+
+package com.example.dateapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Toast;
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    DatePicker datePicker;
+    Button btnDate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        datePicker = findViewById(R.id.datePicker);
+        btnDate = findViewById(R.id.btnDate);
+
+        // DatePicker Widget Listener
+        datePicker.setOnDateChangedListener((view, year, month, day) -> {
+            String msg = day + "/" + (month+1) + "/" + year;
+            Toast.makeText(MainActivity.this, "Widget: " + msg, Toast.LENGTH_SHORT).show();
+        });
+
+        // DatePickerDialog
+        btnDate.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dialog = new DatePickerDialog(
+                    MainActivity.this,
+                    (view, y, m, d) -> {
+                        String msg = d + "/" + (m+1) + "/" + y;
+                        Toast.makeText(MainActivity.this, "Dialog: " + msg, Toast.LENGTH_SHORT).show();
+                    },
+                    year, month, day);
+
+            dialog.show();
+        });
+    }
+}
+
+Q2nav buttons (create 3 fragment)
+
+main xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"/>
+
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"/>
+
+        <Button
+            android:id="@+id/btnContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact"/>
+    </LinearLayout>
+
+    <!-- FrameLayout -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+main java
+
+package com.example.c;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import android.os.Bundle;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnHome, btnAbout, btnContact;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnHome = findViewById(R.id.btnHome);
+        btnAbout = findViewById(R.id.btnAbout);
+        btnContact = findViewById(R.id.btnContact);
+
+        btnHome.setOnClickListener(v -> loadFragment(new HomeFragment()));
+        btnAbout.setOnClickListener(v -> loadFragment(new AboutFragment()));
+        btnContact.setOnClickListener(v -> loadFragment(new ContactFragment()));
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, fragment)
+                .commit();
+    }
+}
+
+fragment_home xml
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="This is Home Page"
+    android:textSize="20sp"
+    android:gravity="center"/>
+
+HomeFragment java
+package com.example.c;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class HomeFragment extends Fragment {
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull android.view.LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        TextView textView = new TextView(getActivity());
+        textView.setText("This is Home Page");
+        textView.setTextSize(22);
+        textView.setGravity(Gravity.CENTER);
+
+        return textView;
+    }
+}
+
+fragment_about xml
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="This is About Page"
+    android:textSize="20sp"
+    android:gravity="center"/>
+
+AboutFragment java
+package com.example.c;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class AboutFragment extends Fragment {
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull android.view.LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        TextView textView = new TextView(getActivity());
+        textView.setText("This is About Page");
+        textView.setTextSize(22);
+        textView.setGravity(Gravity.CENTER);
+
+        return textView;
+    }
+}
+
+fragment_contact xml
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="This is Contact Page"
+    android:textSize="20sp"
+    android:gravity="center"/>
+
+ContactFragment java
+package com.example.c;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class ContactFragment extends Fragment {
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull android.view.LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        TextView textView = new TextView(getActivity());
+        textView.setText("This is Contact Page");
+        textView.setTextSize(22);
+        textView.setGravity(Gravity.CENTER);
+
+        return textView;
+    }
+}

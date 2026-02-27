@@ -1,0 +1,157 @@
+Q1 grid view array adptr
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="3"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
+    android:gravity="center"/>
+
+package com.example.gridviewdemo;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    GridView gridView;
+
+    String[] items = {
+            "One", "Two", "Three",
+            "Four", "Five", "Six",
+            "Seven", "Eight", "Nine"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        gridView = findViewById(R.id.gridView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                items
+        );
+
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            Toast.makeText(this,
+                    "Clicked: " + items[position],
+                    Toast.LENGTH_SHORT).show();
+        });
+    }
+}
+
+
+
+
+Q2accpts 2 no give power 
+main xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/num1"
+        android:hint="Enter First Number"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/num2"
+        android:hint="Enter Second Number"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:text="Press Here for Options"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:background="#black"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+main java
+package com.example.contextmenuapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText num1, num2;
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+        result = findViewById(R.id.result);
+
+        // Show Popup Menu on TAP
+        result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+        popupMenu.getMenu().add(0, 1, 0, "Power (A^B)");
+        popupMenu.getMenu().add(0, 2, 0, "Average");
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                double a = Double.parseDouble(num1.getText().toString());
+                double b = Double.parseDouble(num2.getText().toString());
+
+                switch (item.getItemId()) {
+
+                    case 1:
+                        double power = Math.pow(a, b);
+                        result.setText("Power (A^B) = " + power);
+                        return true;
+
+                    case 2:
+                        double avg = (a + b) / 2;
+                        result.setText("Average = " + avg);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+}
+

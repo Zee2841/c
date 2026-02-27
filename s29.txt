@@ -1,0 +1,158 @@
+Q1prime
+Q1 chk prime
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Prime"/>
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingTop="20dp"/>
+
+</LinearLayout>
+
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText number;
+    Button check;
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        number = findViewById(R.id.etNumber);
+        check = findViewById(R.id.btnCheck);
+        result = findViewById(R.id.tvResult);
+
+        check.setOnClickListener(v -> {
+
+            int num = Integer.parseInt(number.getText().toString());
+            boolean isPrime = true;
+
+            if (num <= 1) {
+                isPrime = false;
+            } else {
+                for (int i = 2; i <= num / 2; i++) {
+                    if (num % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isPrime) {
+                result.setText(num + " is a Prime Number");
+            } else {
+                result.setText(num + " is Not a Prime Number");
+            }
+        });
+    }
+}
+
+
+Q2Q2
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText number;
+    Button calculate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        number = findViewById(R.id.etNumber);
+        calculate = findViewById(R.id.btnCalculate);
+
+        calculate.setOnClickListener(v -> {
+
+            int num = Integer.parseInt(number.getText().toString());
+            long fact = 1;
+
+            for(int i = 1; i <= num; i++) {
+                fact = fact * i;
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Factorial Result");
+            builder.setIcon(android.R.drawable.ic_dialog_info);
+
+            builder.setMessage("Entered Number: " + num +
+                    "\nFactorial: " + fact);
+
+            builder.setPositiveButton("OK", (dialog, which) -> {});
+
+            builder.setNegativeButton("Cancel", (dialog, which) -> {});
+
+            builder.setNeutralButton("Close", (dialog, which) -> {});
+
+            builder.setCancelable(false);  // Non-cancellable
+
+            builder.show();
+        });
+    }
+}
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate Factorial"/>
+
+</LinearLayout>

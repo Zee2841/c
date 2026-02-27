@@ -1,0 +1,173 @@
+Q1 even odd
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/number"
+        android:hint="Enter a number"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnCheck"
+        android:text="Check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:textSize="18sp"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+package com.example.evenodd;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText number;
+    Button btnCheck;
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        number = findViewById(R.id.number);
+        btnCheck = findViewById(R.id.btnCheck);
+        result = findViewById(R.id.result);
+
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int num = Integer.parseInt(number.getText().toString());
+
+                if (num % 2 == 0) {
+                    result.setText(num + " is Even Number");
+                } else {
+                    result.setText(num + " is Odd Number");
+                }
+            }
+        });
+    }
+}
+
+Q2button date picker and time picker
+main java 
+package com.example.c;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnSelect;
+    TextView tvDate, tvTime;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnSelect = findViewById(R.id.btnSelect);
+        tvDate = findViewById(R.id.tvDate);
+        tvTime = findViewById(R.id.tvTime);
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Open Date Picker
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        (view, selectedYear, selectedMonth, selectedDay) -> {
+
+                            tvDate.setText("Selected Date: " +
+                                    selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
+
+                            // After Date is selected → Open Time Picker
+                            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                            int minute = calendar.get(Calendar.MINUTE);
+
+                            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                                    MainActivity.this,
+                                    (timeView, selectedHour, selectedMinute) -> {
+
+                                        tvTime.setText("Selected Time: " +
+                                                selectedHour + ":" + selectedMinute);
+                                    },
+                                    hour, minute, true);
+
+                            timePickerDialog.show();
+
+                        },
+                        year, month, day);
+
+                datePickerDialog.show();
+            }
+        });
+    }
+}
+
+main xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnSelect"
+        android:text="Select Date &amp; Time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:text="Selected Date:"
+        android:textSize="18sp"
+        android:paddingTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:text="Selected Time:"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

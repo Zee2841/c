@@ -1,0 +1,230 @@
+Q1 list view alert dia
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+package com.example.listviewdialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView listView;
+
+    String[] countries = {
+            "India", "USA", "Canada", "Germany",
+            "France", "Japan", "Australia",
+            "Brazil", "Italy", "China"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = findViewById(R.id.listView);
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_1,
+                        countries);
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+
+            String selectedCountry = countries[position];
+
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Selected Country");
+            builder.setMessage("You selected: " + selectedCountry);
+            builder.setPositiveButton("OK", null);
+            builder.show();
+        });
+    }
+}
+
+Q2tab layout fragments?(create 3)
+main xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="fixed"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+main java
+package com.example.tablayoutapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import android.os.Bundle;
+
+import com.google.android.material.tabs.TabLayout;
+
+public class MainActivity extends AppCompatActivity {
+
+    TabLayout tabLayout;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tabLayout = findViewById(R.id.tabLayout);
+
+        tabLayout.addTab(tabLayout.newTab().setText("BCA"));
+        tabLayout.addTab(tabLayout.newTab().setText("MCA"));
+        tabLayout.addTab(tabLayout.newTab().setText("PHD"));
+
+        loadFragment(new BCAFragment()); // Default
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                Fragment fragment = null;
+
+                switch (tab.getPosition()) {
+                    case 0:
+                        fragment = new BCAFragment();
+                        break;
+                    case 1:
+                        fragment = new MCAFragment();
+                        break;
+                    case 2:
+                        fragment = new PHDFragment();
+                        break;
+                }
+
+                loadFragment(fragment);
+            }
+
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, fragment)
+                .commit();
+    }
+}
+
+BCAFragment java
+package com.example.tablayoutapp;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+public class BCAFragment extends Fragment {
+
+    @Override
+    public View onCreateView(android.view.LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        TextView tv = new TextView(getActivity());
+        tv.setText("BCA Course");
+        tv.setTextSize(22);
+        tv.setGravity(Gravity.CENTER);
+
+        return tv;
+    }
+}
+
+MCAFragment java
+package com.example.tablayoutapp;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+public class MCAFragment extends Fragment {
+
+    @Override
+    public View onCreateView(android.view.LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        TextView tv = new TextView(getActivity());
+        tv.setText("MCA Course");
+        tv.setTextSize(22);
+        tv.setGravity(Gravity.CENTER);
+
+        return tv;
+    }
+}
+
+PHDFragments java
+package com.example.tablayoutapp;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+public class PHDFragment extends Fragment {
+
+    @Override
+    public View onCreateView(android.view.LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        TextView tv = new TextView(getActivity());
+        tv.setText("PHD Course");
+        tv.setTextSize(22);
+        tv.setGravity(Gravity.CENTER);
+
+        return tv;
+    }
+}
+
+no xml needed
