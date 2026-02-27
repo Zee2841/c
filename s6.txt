@@ -1,0 +1,220 @@
+Q1 alert dialoge box
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Alert Dialog"/>
+
+</LinearLayout>
+
+package com.example.c;
+
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnDialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnDialog = findViewById(R.id.btnDialog);
+
+        btnDialog.setOnClickListener(v -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle("Confirmation");
+            builder.setMessage("Do you want to continue?");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+            builder.setPositiveButton("Yes", (dialog, which) ->
+                    Toast.makeText(this,"You clicked YES",Toast.LENGTH_SHORT).show());
+
+            builder.setNegativeButton("No", (dialog, which) ->
+                    Toast.makeText(this,"You clicked NO",Toast.LENGTH_SHORT).show());
+
+            builder.setNeutralButton("Cancel", (dialog, which) ->
+                    Toast.makeText(this,"You clicked CANCEL",Toast.LENGTH_SHORT).show());
+
+            builder.setCancelable(false);   // Dialog cannot close by outside touch
+
+            builder.show();
+        });
+    }
+}
+
+Q2 registration (create 2 activity)
+main xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Mobile Number"
+        android:inputType="phone"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
+
+main java
+package com.example.c;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText etName, etEmail, etMobile;
+    Button btnRegister;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        etName = findViewById(R.id.etName);
+        etEmail = findViewById(R.id.etEmail);
+        etMobile = findViewById(R.id.etMobile);
+        btnRegister = findViewById(R.id.btnRegister);
+
+        btnRegister.setOnClickListener(v -> {
+
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
+            String mobile = etMobile.getText().toString();
+
+            if(name.isEmpty() || email.isEmpty() || mobile.isEmpty()) {
+
+                Intent i = new Intent(MainActivity.this, ErrorActivity.class);
+                startActivity(i);
+
+            } else {
+
+                Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
+                i.putExtra("username", name);
+                startActivity(i);
+            }
+        });
+    }
+}
+
+activity_welcome xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+</LinearLayout>
+
+WelcomeActivity java
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class WelcomeActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_welcome);
+
+        TextView tvWelcome = findViewById(R.id.tvWelcome);
+
+        String name = getIntent().getStringExtra("username");
+
+        tvWelcome.setText("Welcome " + name + "!");
+    }
+}
+
+activity_error xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#FF0000"/>
+
+</LinearLayout>
+
+ErrorActivity java
+package com.example.c;
+
+import android.os.Bundle;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ErrorActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_error);
+
+        TextView tvError = findViewById(R.id.tvError);
+        tvError.setText("Error! All fields are required.");
+    }
+}
+
